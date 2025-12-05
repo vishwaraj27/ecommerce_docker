@@ -1,0 +1,18 @@
+<section class="py-6 bg-white shadow-sm">
+  <h2 class="text-2xl font-bold mb-4 px-6">Shop by Category</h2>
+  <div
+    class="flex overflow-x-auto space-x-6 px-6 scrollbar-hide"
+  >
+    <div
+      *ngFor="let c of categories"
+      class="flex-shrink-0 w-32 text-center cursor-pointer hover:scale-105 transition"
+    >
+      <img
+        [src]="c.image"
+        alt="{{ c.name }}"
+        class="h-24 w-24 object-contain mx-auto mb-2"
+      />
+      <p class="font-medium text-gray-700">{{ c.name }}</p>
+    </div>
+  </div>
+</section>

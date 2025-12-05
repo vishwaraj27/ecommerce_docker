@@ -1,0 +1,49 @@
+<h2 class="title">Admin Dashboard</h2>
+
+<div *ngIf="loading" class="loading">Loading...</div>
+
+<div class="stats-grid" *ngIf="!loading">
+  <div class="card">
+    <h3>Total Orders</h3>
+    <p>{{ stats.totalOrders }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Revenue</h3>
+    <p>₹{{ stats.revenue }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Users</h3>
+    <p>{{ stats.totalUsers }}</p>
+  </div>
+
+  <div class="card low-stock">
+    <h3>Low Stock</h3>
+    <p>{{ stats.lowStock }}</p>
+  </div>
+</div>
+
+<h3 class="subtitle">Recent Orders</h3>
+
+<table class="orders-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Placed On</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let o of recentOrders">
+      <td>{{o.id}}</td>
+      <td>{{o.fullName}}</td>
+      <td>₹{{o.grandTotal}}</td>
+      <td>{{o.deliveryStatus}}</td>
+      <td>{{o.createdAt | date:'short'}}</td>
+    </tr>
+  </tbody>
+</table>

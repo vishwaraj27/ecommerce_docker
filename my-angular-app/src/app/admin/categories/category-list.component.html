@@ -1,0 +1,57 @@
+<div class="admin-section">
+  <div class="topbar">
+    <h2>Categories</h2>
+    <div>
+      <button class="primary" (click)="create()">+ Add Category</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading...</div>
+
+  <table *ngIf="!loading && categories.length" class="cat-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Slug</th>
+        <th>Parent</th>
+        <th>Status</th>
+        <th style="width: 150px;">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of categories" class="cat-row">
+
+        <td>{{ c.id }}</td>
+
+        <!-- Clicking the name opens edit -->
+        <td class="name-cell" (click)="edit(c.id)">
+          <b>{{ c.name }}</b>
+        </td>
+
+        <td>{{ c.slug || '-' }}</td>
+
+        <!-- FIX: show parent name -->
+        <td>{{ c.parent?.name || '-' }}</td>
+
+        <td>
+          <span class="badge" [class.active]="c.active" [class.inactive]="!c.active">
+            {{ c.active ? 'Active' : 'Disabled' }}
+          </span>
+        </td>
+
+        <td>
+          <button (click)="edit(c.id)">Edit</button>
+          <button class="danger" (click)="disable(c.id)">Disable</button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+  <div *ngIf="!loading && categories.length === 0" class="empty">
+    No categories yet.
+  </div>
+</div>

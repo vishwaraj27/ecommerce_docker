@@ -1,0 +1,77 @@
+<div class="product-form">
+  <h2>{{ isNew ? 'Create Product' : 'Edit Product' }}</h2>
+
+  <div class="form-row">
+    <label>Name</label>
+    <input [(ngModel)]="model.name" />
+  </div>
+
+  <div class="form-row">
+  <label>Category</label>
+
+  <!-- bind to category.id NOT slug -->
+  <select
+    [(ngModel)]="model.category.id"
+    (ngModelChange)="onCategoryChange($event)"
+    name="category"
+  >
+    <option [ngValue]="null">-- Select Category --</option>
+
+    <option *ngFor="let c of categories" [ngValue]="c.id">
+      {{ c.name }}
+    </option>
+  </select>
+</div>
+
+  <div class="form-row">
+    <label>Price (₹)</label>
+    <input type="number" [(ngModel)]="model.price" />
+  </div>
+
+  <div class="form-row">
+    <label>Cost Price (₹)</label>
+    <input type="number" [(ngModel)]="model.costPrice" />
+  </div>
+
+  <div class="form-row">
+    <label>Stock Quantity</label>
+    <input type="number" [(ngModel)]="model.stockQuantity" />
+  </div>
+
+  <div class="form-row">
+    <label>Reorder Level</label>
+    <input type="number" [(ngModel)]="model.reorderLevel" />
+  </div>
+
+  <div class="form-row">
+    <label>Featured</label>
+    <input type="checkbox" [(ngModel)]="model.featured" />
+  </div>
+
+  <div class="form-row">
+    <label>Active</label>
+    <input type="checkbox" [(ngModel)]="model.active" />
+  </div>
+
+  <div class="form-row">
+    <label>Description</label>
+    <textarea [(ngModel)]="model.description"></textarea>
+  </div>
+
+  <div class="form-row">
+    <label>Images (multiple)</label>
+    <input type="file" (change)="onFiles($event)" multiple />
+  </div>
+
+  <div class="previews">
+    <div class="preview" *ngFor="let p of imagePreviews; let i = index">
+      <img [src]="p" />
+      <button (click)="removePreview(i)">Remove</button>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button (click)="save()" class="primary">Save</button>
+    <button (click)="cancel()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="admin-section">
+  <div class="top-bar">
+    <h2>Products</h2>
+    <div class="actions">
+      <input [(ngModel)]="search" (keyup.enter)="searchNow()" placeholder="Search name or category" />
+      <button (click)="searchNow()">Search</button>
+      <button (click)="clearSearch()">Clear</button>
+      <button class="primary" (click)="createNew()">+ New Product</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading...</div>
+
+  <table class="product-table" *ngIf="!loading">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>SKU/ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Featured</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td class="thumb">
+          <img *ngIf="p.images" [src]="p.images.split(',')[0] ? ('http://localhost:8080/uploads/' + p.images.split(',')[0]) : ''" alt="" />
+        </td>
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{ p.category?.slug }}</td>
+        <td>₹{{p.price || 0}}</td>
+        <td>
+          <span [class.low]="lowStock(p)">{{p.stockQuantity ?? 0}}</span>
+        </td>
+        <td>{{p.featured ? 'Yes' : 'No'}}</td>
+        <td>{{p.active ? 'Yes' : 'No'}}</td>
+        <td>
+          <button (click)="edit(p)">Edit</button>
+          <button class="danger" (click)="delete(p)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pager" *ngIf="totalPages > 1">
+    <button (click)="load(page-1)" [disabled]="page<=0">Prev</button>
+    <span>Page {{page + 1}} / {{totalPages}}</span>
+    <button (click)="load(page+1)" [disabled]="page+1>=totalPages">Next</button>
+  </div>
+</div>

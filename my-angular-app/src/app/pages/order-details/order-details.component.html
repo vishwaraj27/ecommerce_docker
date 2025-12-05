@@ -1,0 +1,63 @@
+<div class="min-h-screen bg-gray-50 p-6">
+  <button class="text-blue-600 mb-4" (click)="back()">← Back to Orders</button>
+
+  <div *ngIf="loading" class="text-gray-600">Loading order details...</div>
+
+  <div *ngIf="!loading && order" class="space-y-6">
+
+    <!-- ORDER SUMMARY -->
+    <div class="bg-white p-4 rounded shadow">
+      <h2 class="text-xl font-semibold mb-2">Order #{{ order.id }}</h2>
+      <p class="text-gray-500">Placed on {{ order.createdAt | date:'mediumDate' }}</p>
+
+      <div class="mt-3 text-lg font-semibold text-blue-600">
+        Total Paid: ₹{{ order.totalAmount }}
+      </div>
+    </div>
+
+    <!-- SHIPPING ADDRESS -->
+    <div class="bg-white p-4 rounded shadow" *ngIf="address">
+      <h3 class="text-lg font-semibold mb-2">Shipping Address</h3>
+
+      <div class="text-gray-700">
+        <div class="font-medium">{{ address.fullName }}</div>
+        <div>{{ address.line1 }}</div>
+        <div *ngIf="address.line2">{{ address.line2 }}</div>
+        <div>{{ address.city }}, {{ address.state }} - {{ address.postalCode }}</div>
+        <div>{{ address.country }}</div>
+        <div class="mt-1">📞 {{ address.phone }}</div>
+      </div>
+    </div>
+
+    <!-- ORDER ITEMS -->
+    <div class="bg-white p-4 rounded shadow">
+      <h3 class="text-lg font-semibold mb-3">Items</h3>
+
+      <div
+        *ngFor="let item of order.items"
+        class="flex items-center gap-4 border-b last:border-none py-3"
+      >
+        <img
+          [src]="item.product.imageUrl"
+          class="h-20 w-20 object-cover rounded"
+        />
+
+        <div class="flex-1">
+          <div class="font-medium">{{ item.product.name }}</div>
+          <div class="text-gray-500 text-sm">
+            Qty: {{ item.quantity }} × ₹{{ item.product.price }}
+          </div>
+        </div>
+
+        <div class="font-semibold text-gray-700">
+          ₹{{ item.price }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="!loading && !order" class="text-gray-600 text-center">
+    Order not found.
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<!-- Global navbar for all logged-in user pages -->
+<app-navbar
+  *ngIf="showNavbar"
+  [username]="username"
+  [cartCount]="cartCount">
+</app-navbar>
+
+<!-- Routed page content -->
+<router-outlet></router-outlet>

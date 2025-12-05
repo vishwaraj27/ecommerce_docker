@@ -1,0 +1,8 @@
+.product-form { background:white; padding:16px; border-radius:8px; }
+.form-row { margin-bottom:10px; display:flex; flex-direction:column; }
+.form-row label { font-weight:600; margin-bottom:6px; }
+.form-row input, .form-row textarea { padding:8px; border:1px solid #ddd; border-radius:6px; }
+.previews { display:flex; gap:10px; flex-wrap:wrap; margin:8px 0; }
+.preview img { width:100px; height:100px; object-fit:cover; border-radius:6px; }
+.form-actions { display:flex; gap:8px; margin-top:12px; }
+.primary { background:#1d4ed8; color:white; padding:8px 12px; border:none; border-radius:6px; }

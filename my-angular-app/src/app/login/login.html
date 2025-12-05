@@ -1,0 +1,59 @@
+<div class="auth-container">
+  <div class="auth-box" 
+       [class.show-register]="showRegister"
+       [class.show-forgot]="showForgot">
+
+    <!-- LOGIN FORM -->
+    <div class="form login-form" *ngIf="!showForgot && !showRegister">
+      <div class="form-content">
+        <h2>Login</h2>
+        <input [(ngModel)]="email" placeholder="Email" required />
+        <input [(ngModel)]="password" type="password" placeholder="Password" required />
+        <button (click)="login()">Login</button>
+
+        <p class="switch-text"><a (click)="toggleForgot()">Forgot Password?</a></p>
+        <p class="switch-text">Don't have an account? <a (click)="toggleForm()">Register</a></p>
+      </div>
+
+      <p class="message" [class.success]="message.includes('success')" *ngIf="message">
+        {{ message }}
+      </p>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="form register-form" *ngIf="showRegister">
+      <div class="form-content">
+        <h2>Register</h2>
+        <input [(ngModel)]="regName" placeholder="Full Name" required />
+        <input [(ngModel)]="regEmail" placeholder="Email" required />
+        <input [(ngModel)]="regPassword" type="password" placeholder="Password" required />
+        <input [(ngModel)]="regConfirmPassword" type="password" placeholder="Confirm Password" required />
+
+        <!-- ✅ Password tip appears dynamically -->
+        <p class="password-tip" *ngIf="passwordTip">{{ passwordTip }}</p>
+
+        <button (click)="register()">Register</button>
+
+        <p class="switch-text">Already have an account? <a (click)="toggleForm()">Login</a></p>
+      </div>
+
+      <p class="message" [class.success]="message.includes('success')" *ngIf="message">
+        {{ message }}
+      </p>
+    </div>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <div class="form forgot-form" *ngIf="showForgot">
+      <div class="form-content">
+        <h2>Forgot Password</h2>
+        <input [(ngModel)]="forgotEmail" placeholder="Enter your registered email" required />
+        <button (click)="sendResetLink()">Send Reset Link</button>
+        <p class="switch-text"><a (click)="toggleForgot()">Back to Login</a></p>
+      </div>
+
+      <p class="message" [class.success]="message.includes('success')" *ngIf="message">
+        {{ message }}
+      </p>
+    </div>
+  </div>
+</div>

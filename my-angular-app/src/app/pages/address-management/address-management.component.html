@@ -1,0 +1,93 @@
+<div class="max-w-3xl mx-auto p-4">
+
+  <h1 class="text-2xl font-bold mb-5">Your Addresses</h1>
+
+  <button
+    (click)="addNew()"
+    class="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700 mb-6"
+  >
+    + Add New Address
+  </button>
+
+  <!-- Listing all addresses -->
+  <div *ngFor="let a of addresses" class="border rounded-lg p-4 mb-4 relative">
+
+    <div class="flex justify-between">
+      <div>
+        <div class="font-semibold text-lg">{{ a.fullName }}</div>
+
+        <div class="text-gray-600 mt-1">
+          {{ a.line1 }}<br />
+          {{ a.line2 }}<br />
+          {{ a.city }} - {{ a.postalCode }}<br />
+          {{ a.state }}, {{ a.country }}
+        </div>
+
+        <div class="text-gray-700 mt-1">📞 {{ a.phone }}</div>
+
+        <div class="text-xs bg-gray-200 inline-block px-2 py-1 rounded mt-2">
+          {{ a.label }}
+        </div>
+
+        <div
+          *ngIf="a.isDefault"
+          class="text-xs bg-green-600 text-white inline-block px-2 py-1 rounded mt-2 ml-2"
+        >
+          Default
+        </div>
+      </div>
+
+      <div class="flex flex-col items-end gap-2">
+        <button (click)="edit(a)" class="text-blue-600 hover:underline">
+          Edit
+        </button>
+        <button (click)="remove(a.id)" class="text-red-600 hover:underline">
+          Delete
+        </button>
+
+        <button
+          *ngIf="!a.isDefault"
+          (click)="makeDefault(a.id)"
+          class="text-green-600 hover:underline"
+        >
+          Set Default
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Form -->
+  <div *ngIf="showForm" class="border rounded-lg p-5 bg-gray-50">
+
+    <h2 class="text-xl font-semibold mb-4">
+      {{ editMode ? "Edit Address" : "Add New Address" }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <input [(ngModel)]="editing.fullName" class="input" placeholder="Full Name" />
+      <input [(ngModel)]="editing.phone" class="input" placeholder="Phone" />
+
+      <input [(ngModel)]="editing.label" class="input" placeholder="Label (Home/Work)" />
+
+      <input [(ngModel)]="editing.line1" class="input" placeholder="Address Line 1" />
+      <input [(ngModel)]="editing.line2" class="input" placeholder="Address Line 2" />
+
+      <input [(ngModel)]="editing.city" class="input" placeholder="City" />
+      <input [(ngModel)]="editing.state" class="input" placeholder="State" />
+      <input [(ngModel)]="editing.postalCode" class="input" placeholder="Postal Code" />
+
+      <input [(ngModel)]="editing.country" class="input" placeholder="Country" />
+    </div>
+
+    <div class="mt-4 flex gap-3">
+      <button (click)="save()" class="bg-amber-600 text-white px-4 py-2 rounded">
+        Save
+      </button>
+      <button (click)="showForm = false" class="px-4 py-2 border rounded">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

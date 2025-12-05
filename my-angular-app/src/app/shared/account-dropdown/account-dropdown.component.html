@@ -1,0 +1,46 @@
+<div class="relative">
+
+  <!-- Toggle -->
+  <div
+    (click)="toggle()"
+    class="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 rounded cursor-pointer"
+  >
+    <div class="text-gray-700 hidden md:block">
+      Hello, <span class="font-semibold">{{ username }}</span>
+    </div>
+
+    <svg class="h-4 w-4 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M5.23 7.21 10 11.98l4.77-4.77 1.06 1.06L10 14.1 4.17 8.27z"/>
+    </svg>
+  </div>
+
+  <!-- Dropdown -->
+  <div
+    *ngIf="open"
+    class="absolute right-0 mt-2 w-56 bg-white border rounded shadow-lg z-50"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="px-4 py-3 border-b">
+    <div class="font-semibold">{{ username }}</div>
+    </div>
+
+    <ul class="py-1">
+      <li class="px-4 py-2 hover:bg-gray-50 cursor-pointer" (click)="go('/profile')">
+        Your Profile
+      </li>
+
+      <li class="px-4 py-2 hover:bg-gray-50 cursor-pointer" (click)="go('/addresses')">
+        Your Addresses
+      </li>
+
+      <li class="px-4 py-2 hover:bg-gray-50 cursor-pointer" (click)="go('/orders')">
+        Your Orders
+      </li>
+
+      <li class="px-4 py-2 text-red-600 hover:bg-red-50 cursor-pointer" (click)="logout()">
+        Logout
+      </li>
+    </ul>
+  </div>
+
+</div>

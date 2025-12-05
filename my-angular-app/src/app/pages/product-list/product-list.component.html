@@ -1,0 +1,30 @@
+<div class="p-6">
+  <h2 class="text-3xl font-bold mb-6 text-gray-800 capitalize">
+    {{ category }} Products
+  </h2>
+
+  <div *ngIf="loading" class="text-center text-gray-500 py-10">
+    Loading products...
+  </div>
+
+  <app-product-grid
+    *ngIf="!loading"
+    [products]="filteredProducts"
+    (addToCart)="addToCart($event)"
+  ></app-product-grid>
+  <div class="flex justify-center gap-4 mt-8">
+  <button
+    (click)="goHome()"
+    class="bg-gray-200 text-gray-700 px-5 py-2 rounded-lg hover:bg-gray-300 transition"
+  >
+    🏠 Go to Home
+  </button>
+
+  <button
+    (click)="goToCart()"
+    class="bg-amber-600 text-white px-5 py-2 rounded-lg hover:bg-amber-700 transition"
+  >
+    🛒 Go to Cart
+  </button>
+</div>
+</div>

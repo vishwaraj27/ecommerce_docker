@@ -1,0 +1,7 @@
+input {
+  outline: none;
+}
+
+button {
+  transition: 0.2s;
+}

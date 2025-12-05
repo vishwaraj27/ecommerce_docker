@@ -1,0 +1,23 @@
+<div class="category-form">
+  <h2>{{ isNew ? 'Add Category' : 'Edit Category' }}</h2>
+
+  <div class="form-row">
+    <label>Name</label>
+    <input [(ngModel)]="model.name" />
+  </div>
+
+  <div class="form-row">
+    <label>Parent Category ID (optional)</label>
+    <input type="number" [(ngModel)]="model.parentId" />
+  </div>
+
+  <div class="form-row">
+    <label>Active</label>
+    <input type="checkbox" [(ngModel)]="model.active" />
+  </div>
+
+  <div class="actions">
+    <button class="primary" (click)="save()">Save</button>
+    <button (click)="cancel()">Cancel</button>
+  </div>
+</div>

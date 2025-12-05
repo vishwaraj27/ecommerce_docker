@@ -1,0 +1,4 @@
+/* simple shadow & animation */
+:host {
+  position: relative;
+}

@@ -1,0 +1,34 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <div
+    *ngFor="let product of products"
+    class="bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col cursor-pointer"
+    (click)="goToProductDetails(product)"
+  >
+    <img
+      [src]="product.imageUrl || 'assets/images/placeholder.png'"
+      alt="{{ product.name }}"
+      class="h-48 w-full object-contain p-4"
+    />
+
+    <div class="p-4 flex flex-col flex-1">
+      <h3 class="font-semibold mb-1 text-gray-800 text-lg text-center">
+        {{ product.name }}
+      </h3>
+
+      <p class="text-gray-600 text-center mb-2 font-medium">
+        ₹{{ product.price }}
+      </p>
+
+      <p class="text-gray-500 text-sm mb-4 text-center line-clamp-2">
+        {{ product.description }}
+      </p>
+
+      <button
+        (click)="handleAddToCart(product.id, $event)"
+        class="mt-auto bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>

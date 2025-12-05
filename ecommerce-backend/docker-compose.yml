@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16
+    container_name: ecommerce_db
+    restart: always
+    environment:
+      POSTGRES_DB: ecommerce
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Password1
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./ecommerce-backend
+      dockerfile: Dockerfile
+    container_name: ecommerce_backend
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ecommerce
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Password1
+      JWT_SECRET: MySuperStrongJWTSecretKey_123456789012345678901234
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ../my-angular-app      # IMPORTANT: this matches your real path
+      dockerfile: Dockerfile
+    container_name: my-angular-app
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:
+
