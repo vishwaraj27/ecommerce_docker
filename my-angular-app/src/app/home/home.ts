@@ -15,7 +15,7 @@ import { FooterComponent } from '../shared/footer/footer.component';
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule,    
+    CommonModule,
     HeroBannerComponent,
     ProductGridComponent,
     FooterComponent
@@ -24,12 +24,14 @@ import { FooterComponent } from '../shared/footer/footer.component';
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
+
   categories = [
-    { id: 'spices', name: 'Spices & Masalas', image: 'assets/images/spices.jpg' },
-    { id: 'oils', name: 'Healthy Oils', image: 'assets/images/oils.jpg' },
-    { id: 'nuts', name: 'Nuts & Dry Fruits', image: 'assets/images/nuts.jpg' },
-    { id: 'healthmix', name: 'Health Mixes', image: 'assets/images/healthmix.jpg' },
+    { id: 'spices',    name: 'Spices & Masalas',     image: 'assets/images/spices.webp' },
+    { id: 'oils',      name: 'Healthy Oils',         image: 'assets/images/oils.webp' },
+    { id: 'nuts',      name: 'Nuts & Dry Fruits',    image: 'assets/images/nuts.webp' },
+    { id: 'healthmix', name: 'Health Mixes',         image: 'assets/images/healthmix.webp' },
   ];
+
   username: string = '';
   loading: boolean = true;
 
@@ -76,22 +78,24 @@ export class HomeComponent implements OnInit {
       error: () => alert('❌ Failed to add to cart'),
     });
   }
+
   // ✅ Search handler from Navbar
   onSearch(query: string) {
-  const q = query.toLowerCase().trim();
+    const q = query.toLowerCase().trim();
 
-  // Filter the products based on name or description
-  this.products = this.products.filter(
-    (p) =>
-      p.name.toLowerCase().includes(q) ||
-      p.description.toLowerCase().includes(q)
-  );
+    // Filter the products based on name or description
+    this.products = this.products.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+    );
 
-  // Optionally, if you want to show all products again when search is cleared:
-  if (!q) {
-    this.loadProducts();
+    // Optionally, if you want to show all products again when search is cleared:
+    if (!q) {
+      this.loadProducts();
+    }
   }
-}
+
   logout() {
     this.authService.logout();
   }

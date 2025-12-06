@@ -4,12 +4,23 @@
     [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
   >
     <div
-      *ngFor="let banner of banners"
-      class="min-w-full h-72 sm:h-[28rem] flex items-center justify-center bg-cover bg-center"
-      [style.backgroundImage]="'url(' + banner.image + ')'">
-      
+      *ngFor="let banner of banners; let i = index"
+      class="relative min-w-full h-72 sm:h-[28rem] flex items-center justify-center bg-gray-900"
+    >
+      <!-- Use <img> instead of background-image so browser can optimize -->
+      <img
+        [src]="banner.image"
+        [alt]="banner.title"
+        class="absolute inset-0 w-full h-full object-cover"
+        [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+      />
+
+      <!-- Dark overlay -->
+      <div class="absolute inset-0 bg-black/40"></div>
+
+      <!-- Text + button content -->
       <div
-        class="bg-black/50 text-white p-6 sm:p-10 rounded-xl text-center backdrop-blur-sm max-w-xl mx-auto"
+        class="relative z-10 text-white p-6 sm:p-10 rounded-xl text-center backdrop-blur-sm max-w-xl mx-auto"
       >
         <h2 class="text-3xl sm:text-5xl font-extrabold mb-3 drop-shadow">
           {{ banner.title }}
@@ -28,7 +39,7 @@
   </div>
 
   <!-- Navigation Dots -->
-  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-2">
+  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
     <div
       *ngFor="let b of banners; let i = index"
       (click)="currentIndex = i"
