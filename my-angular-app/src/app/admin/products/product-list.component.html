@@ -28,7 +28,7 @@
     <tbody>
       <tr *ngFor="let p of products">
         <td class="thumb">
-          <img *ngIf="p.images" [src]="p.images.split(',')[0] ? ('http://localhost:8080/uploads/' + p.images.split(',')[0]) : ''" alt="" />
+          <img *ngIf="p.images" [src]="p.images.split(',')[0] ? ('http://3.108.100.219:8080/uploads/' + p.images.split(',')[0]) : ''" alt="" />
         </td>
         <td>{{p.id}}</td>
         <td>{{p.name}}</td>
