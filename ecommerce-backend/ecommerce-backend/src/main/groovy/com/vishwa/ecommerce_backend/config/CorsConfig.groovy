@@ -14,16 +14,16 @@ class CorsConfig {
         def config = new CorsConfiguration()
         config.setAllowCredentials(true)
 
-        // Allow local Angular (dev)
+        // Local Angular (dev)
         config.addAllowedOrigin("http://localhost:4200")
 
-        // Allow Docker frontend (Nginx)
+        // Docker frontend (when testing locally)
         config.addAllowedOrigin("http://localhost")
 
-        // Future domain (optional)
-        // config.addAllowedOrigin("https://yourdomain.com")
+        // 🌍 YOUR EC2 FRONTEND (Elastic IP)
+        config.addAllowedOrigin("http://3.108.100.219")
 
-        // Allow all headers & methods
+        // Allow all headers and methods
         config.addAllowedHeader("*")
         config.addAllowedMethod("*")
 
