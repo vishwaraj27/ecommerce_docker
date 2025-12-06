@@ -31,7 +31,7 @@ class SecurityConfig {
                     it
                  .requestMatchers("/api/auth/**").permitAll()
              .requestMatchers("/uploads/**").permitAll()   // allow images
-              .requestMatchers("/api/admin/**").hasRole("ROLE_ADMIN")  // ⭐ ONLY ADMIN
+              .requestMatchers("/api/admin/**").hasRole("ADMIN")  // ⭐ ONLY ADMIN
               .anyRequest().authenticated()
             }
 
