@@ -65,6 +65,6 @@ export class AdminProductService {
   // helper to build full URL for stored images (local static serving)
   imageUrl(filename: string): string {
     if (!filename) return '';
-    return `http://3.108.100.219:8080/uploads/${filename}`;
+    return `https://vancart.in/uploads/${filename}`;
   }
 }
