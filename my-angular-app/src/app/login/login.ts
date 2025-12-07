@@ -86,7 +86,13 @@ export class LoginComponent {
 
   // ✅ REGISTER (with password validation + delay)
   register() {
-    if (!this.regName || !this.regEmail || !this.regPassword || !this.regConfirmPassword) {
+    
+     this.message = 'Registration is disabled - testing phase.';
+    this.passwordTip = '';
+    this.clearRegisterFields();
+    return;
+    
+    /* if (!this.regName || !this.regEmail || !this.regPassword || !this.regConfirmPassword) {
       this.message = 'Please fill in all required fields.';
       return;
     }
@@ -123,7 +129,7 @@ export class LoginComponent {
         this.loading = false;
         this.message = 'Registration failed. Please try again.';
       }
-    });
+    });*/
   }
 
   // ✅ FORGOT PASSWORD
